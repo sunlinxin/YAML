@@ -3,20 +3,44 @@ kind: Deployment
 metadata:
   labels:
     kubeadmiral.io/propagation-policy-name: policy-poc
-  name: nginx-deployment # adjust name for your deployment
-  namespace: fed-ns
+  name: fed-dp
+  namespace: default
 spec:
-  replicas: 2 # adjust number of replicas for your deployment
+  progressDeadlineSeconds: 600
+  replicas: 2
+  revisionHistoryLimit: 10
   selector:
     matchLabels:
-      app: nginx
+      app: fed-dp
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
   template:
     metadata:
+      creationTimestamp: null
       labels:
-        app: nginx
+        app: fed-dp
     spec:
       containers:
-      - name: nginx # adjust name of container
-        image: nginx:alpine # adjust image_name and tag for your container
-        ports:
-        - containerPort: 80 # adjust port for your container
+      - image: nginx
+        imagePullPolicy: Always
+        name: nginx
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /v1
+          name: v1
+          readOnly: true
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: fed-cm
+        name: v1
