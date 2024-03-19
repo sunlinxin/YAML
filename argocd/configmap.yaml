@@ -1,0 +1,7 @@
+apiVersion: v1
+data:
+  k1: v1
+kind: ConfigMap
+metadata:
+  name: fed-cm
+  namespace: fed-ns
