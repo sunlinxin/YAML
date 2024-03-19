@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     kubeadmiral.io/propagation-policy-name: policy-poc
-    name: fed-dp
+  name: fed-dp
   namespace: fed-ns
 spec:
   progressDeadlineSeconds: 600
