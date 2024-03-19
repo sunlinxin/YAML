@@ -5,3 +5,5 @@ kind: ConfigMap
 metadata:
   name: fed-cm
   namespace: fed-ns
+  labels:
+    kubeadmiral.io/propagation-policy-name: policy-poc
