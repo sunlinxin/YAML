@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: fed-service
+  namespace: fed-ns
+spec:
+  ports:
+    - name: test
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: fed-dp
+  sessionAffinity: None
+  type: ClusterIP
