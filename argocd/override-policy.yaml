@@ -1,0 +1,15 @@
+apiVersion: core.kubeadmiral.io/v1alpha1
+kind: OverridePolicy
+metadata:
+  name: mypolicy-op
+  namespace: fed-ns
+spec:
+  overrideRules:
+  - overriders:
+      jsonpatch:
+      - operator: replace
+        path: /spec/template/spec/containers/0/image
+        value: nginx:alpine
+    targetClusters:
+      clusters:
+      - ccnrr9jtlb1dnv13kcdn0 # 指定生效的成员集群，需要替换为您的成员集群ID
