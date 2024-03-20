@@ -1,0 +1,22 @@
+apiVersion: core.kubeadmiral.io/v1alpha1
+kind: PropagationPolicy
+metadata:
+  name: policy-vcjob
+  namespace: fed-ns
+spec:
+  disableFollowerScheduling: false
+  maxClusters: 1 # 按需配置，表示在可选集群范围内选择n个资源最优的集群部署
+  placement:
+  - cluster: ccnrr9jtlb1dnv13kcdn0 # 替换为您的成员集群 ID
+  - cluster: ccnrvu3uf3bkjoog68o7g # 替换为您的成员集群 ID
+  replicasStrategy: Spread
+  reschedulePolicy:
+    disableRescheduling: false
+    replicaRescheduling:
+      avoidDisruption: false
+    rescheduleWhen:
+      clusterAPIResourcesChanged: false
+      clusterJoined: false
+      clusterLabelsChanged: false
+      policyContentChanged: true
+  schedulingMode: Duplicate
