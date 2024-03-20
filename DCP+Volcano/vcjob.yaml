@@ -4,6 +4,7 @@ metadata:
   labels:
     kubeadmiral.io/propagation-policy-name: policy-vcjob
   name: vcjob
+  namespace: fed-ns
 spec:
   minAvailable: 1
   schedulerName: volcano
