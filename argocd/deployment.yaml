@@ -4,7 +4,6 @@ metadata:
   labels:
     kubeadmiral.io/propagation-policy-name: policy-poc
   name: fed-dp
-  namespace: fed-ns
 spec:
   progressDeadlineSeconds: 600
   replicas: 2
